@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Freckle+Face&family=Knewave&family=Poetsen+One&display=swap');
+@import "tailwindcss";
+
+@theme {
+    --color-primary: #030412;
+    --color-secondary: #5c33cc;
+    --color-text: #cad5e2;
+    --color-hover: #ffffff;
+    --color-vividviolet: #9810fa;
+    --color-storm: #282b4b;
+    --color-blackolive: #3a3a3a;
+    --color-raisinblack: #242424;
+    --color-social: #3b3f42;
+}
+
+body {
+    background: #030412;
+    font-family: "Poetsen One", sans-serif;
+    color: white;
+    scroll-behavior: smooth;
+}
