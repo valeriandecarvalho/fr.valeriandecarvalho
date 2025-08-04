@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Freckle+Face&family=Knewave&family=Poetsen+One&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #030412;
+  --color-secondary: #5c33cc;
+  --color-text: #cad5e2;
+  --color-hover: #ffffff;
+  --color-vividviolet: #9810fa;
+  --color-storm: #282b4b;
+  --color-blackolive: #3a3a3a;
+  --color-raisinblack: #242424;
+  --color-social: #3b3f42;
+  --animate-orbit: orbit 50s linear infinite;
+  @keyframes orbit {
+    0% {
+      transform: rotate(calc(var(--angle) * 1deg))
+      translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
+    }
+    100% {
+      transform: rotate(calc(var(--angle) * 1deg + 360deg))
+      translateY(calc(var(--radius) * 1px))
+      rotate(calc((var(--angle) * -1deg) - 360deg));
+    }
+  }
+  --animate-marquee: marquee 50s linear infinite;
+  --animate-marquee-vertical: marquee-vertical 50s linear infinite;
+}
+
+body {
+  background: #030412;
+  font-family: "Poetsen One", sans-serif;
+  color: white;
+  scroll-behavior: smooth;
+}
+
+.hover-animation {
+  @apply hover:-translate-y-1 duration-200;
+}
+
+.scrollbar-hidden {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none;
+}
