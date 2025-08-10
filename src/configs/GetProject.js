@@ -3,15 +3,17 @@ import { reactjs, tailwind, vitejs, javascript, webstorm} from '../assets';
 export const myProject = [
     {
         id: 1,
-        title: "Portfolio & Espace Personnel",
+        title: "valeriandecarvalho.fr",
+        subtitle: "Espace Professionnel",
         description:
-            "Site web portfolio moderne avec animations 3D, développé en React et stylisé avec TailwindCSS pour une expérience utilisateur immersive.",
+            "Site web personnel complet avec animations 3D, blog, interface d’administration et gestion dynamique du contenu. Développé en React avec Vite et stylisé avec TailwindCSS.",
         subDescription: [
-            "Interface interactive avec robot 3D animé (Three.js), effets de parallaxe et animations fluides grâce à Motion/Framer Motion.",
-            "Architecture modulaire responsive avec navigation par sections, système de filtrage pour les certifications et formulaire de contact fonctionnel via EmailJS.",
+            "Interface principale (branche `portfolio`) : portfolio responsive avec robot 3D animé (Three.js), navigation fluide (Framer Motion), système de filtres pour projets et formulaire de contact fonctionnel via EmailJS.",
+            "Branche `dashboard` : panneau d’administration (en développement) permettant d’éditer le contenu du site sans passer par un IDE.",
+            "Branche `blog` : système de gestion et de publication d’articles personnels (en développement).",
         ],
-        href: "https://github.com/valeriandecarvalho/portfolio",
-        image: "/assets/project/portfolio.webp",
+        href: "https://github.com/valeriandecarvalho/fr.valeriandecarvalho",
+        image: "/assets/project/fr.valeriandecarvalho.webp",
         tags: [
             {
                 id: 1,
@@ -43,14 +45,15 @@ export const myProject = [
     },
     {
         id: 2,
-        title: "Coming Soon",
+        title: "À venir",
+        subtitle: "À venir",
         description:
-            "Coming Soon",
+            "À venir",
         subDescription: [
-            "Coming Soon",
+            "À venir",
         ],
         href: "",
-        image: "/assets/project/soon.png",
+        image: "/assets/project/a-venir.webp",
         tags: [],
     }
 ];

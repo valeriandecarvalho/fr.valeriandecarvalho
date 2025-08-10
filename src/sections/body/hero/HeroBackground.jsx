@@ -11,14 +11,14 @@ const HeroBackground = () => {
             {/* Ciel */}
             <div
                 className="absolute inset-0 bg-cover bg-center"
-                style={{ backgroundImage: 'url(/assets/hero/sky.jpg)' }}
+                style={{ backgroundImage: 'url(/assets/hero/sky.webp)' }}
             />
 
             {/* Montagne 3 */}
             <motion.div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{
-                    backgroundImage: 'url(/assets/hero/mountain-3.png)',
+                    backgroundImage: 'url(/assets/hero/mountain-3.webp)',
                     y: mountain3Y
                 }}
             />
@@ -27,7 +27,7 @@ const HeroBackground = () => {
             <motion.div
                 className="absolute inset-0 bg-cover bg-center"
                 style={{
-                    backgroundImage: 'url(/assets/hero/mountain-2.png)',
+                    backgroundImage: 'url(/assets/hero/mountain-2.webp)',
                     y: mountain2Y
                 }}
             />
@@ -36,7 +36,7 @@ const HeroBackground = () => {
             <div
                 className="absolute inset-0 h-[100%] bg-cover bg-center z-20"
                 style={{
-                    backgroundImage: 'url(/assets/hero/mountain-1.png)',
+                    backgroundImage: 'url(/assets/hero/mountain-1.webp)',
                     backgroundPosition: "bottom",
                 }}
             />

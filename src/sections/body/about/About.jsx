@@ -18,7 +18,7 @@ const About = () => {
                     <p className={`${textStyle} mb-2`}>
                         Étudiant passionné par la transformation d'idées en réalités tangibles. Que ce soit à travers le code, des projets concrets ou des défis sportifs, mon moteur est la création.<br /><br />J’allie compréhension théorique et mise en pratique : après avoir assimilé les concepts, j’expérimente activement pour ancrer et valider mes apprentissages.
                     </p>
-                    <img src="/assets/about/pcb.png" alt="Circuit imprimé" className="w-full object-contain mt-auto"/>
+                    <img src="/assets/about/pcb.webp" alt="Circuit imprimé" className="w-full object-contain mt-auto"/>
                 </div>
             ),
             cols: "xl:col-span-6"

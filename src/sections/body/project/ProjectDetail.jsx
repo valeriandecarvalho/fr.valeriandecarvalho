@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import { close, github, arrowup } from "../../../assets/index.js"
 
-const ProjectDetail = ({ title, description, subDescription, image, tags, href, closeModal }) => {
+const ProjectDetail = ({ title, subtitle, description, subDescription, image, tags, href, closeModal }) => {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm p-4">
             <motion.div
@@ -16,10 +16,11 @@ const ProjectDetail = ({ title, description, subDescription, image, tags, href, 
                     <img src={close} className="w-6 h-6" />
                 </button>
 
-                <img src={image} alt={title} className="w-full rounded-t-2xl" />
+                <img src={image} alt={subtitle} className="w-full rounded-t-2xl" />
 
                 <div className="p-5">
-                    <h5 className="mb-2 text-2xl font-bold text-hover">{title}</h5>
+                    <h4 className="mb-0.5 text-2xl text-hover">{title}</h4>
+                    <p className="mb-2 text-lg text-text">{subtitle}</p>
                     <p className="mb-3 font-normal text-text/70 font-sans">{description}</p>
                     {subDescription.map((subDesc, index) => (
                         <p key={index} className="mb-3 font-normal text-text/70 font-sans">{subDesc}</p>
