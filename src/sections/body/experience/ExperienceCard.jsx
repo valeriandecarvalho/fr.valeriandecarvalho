@@ -14,7 +14,7 @@ const ExperienceCard = ({ exp, index, isMobile = false, expandedCards, toggleExp
             <div className="absolute top-3 right-3 w-7 h-7 bg-hover/20 rounded-full flex items-center justify-center text-xs font-bold text-hover border border-hover/40">
                 {String(index + 1).padStart(2, '0')}
             </div>
-            {/* Header */}
+            {/* Navbar */}
             <div className="mb-4 relative z-10 pr-10">
                 <div className="flex items-center space-x-2 mb-2">
                     <div className="w-1.5 h-5 bg-gradient-to-b from-hover to-secondary rounded-full"></div>

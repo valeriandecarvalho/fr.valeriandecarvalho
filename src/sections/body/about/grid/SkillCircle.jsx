@@ -24,7 +24,7 @@ import {
     vitejs,
     vscode,
     webstorm,
-} from "../../../assets";
+} from "../../../../assets/index.js";
 
 export function SkillCircle() {
     const skills = [

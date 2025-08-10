@@ -1,15 +1,14 @@
-import SectionWrapper from "../SectionWrapper.jsx";
+import SectionWrapper from "../../SectionWrapper.jsx";
 import Card from "./Card.jsx";
 import CopyEmailButton from "./CopyEmailButton.jsx";
 import {Globe} from "./Globe.jsx";
 import {SkillCircle} from "./SkillCircle.jsx";
-import { arduino, cplusplus, docker, git, python, raspberry } from "../../../assets/index.js";
+import { arduino, cplusplus, docker, git, python, raspberry } from "../../../../assets/index.js";
 import { useRef } from "react";
 
 const About = () => {
     const containerRef = useRef(null);
     const textStyle = "text-text/70 text-xs font-sans";
-
     const cards = [
         {
             title: "Comprendre & Construire",
@@ -77,7 +76,7 @@ const About = () => {
     ];
 
     return (
-        <SectionWrapper id="a-propos" className="pt-18 xl:pt-20 mb-[100vh]">
+        <SectionWrapper id="" className="pt-18 xl:pt-20 mb-[100vh]">
             <p className="text-2xl md:text-3xl xl:text-4xl font-medium text-center mb-10">À propos</p>
             <div className="max-w-6xl mx-auto px-4">
                 <div className="grid grid-cols-1 xl:grid-cols-10 gap-5">

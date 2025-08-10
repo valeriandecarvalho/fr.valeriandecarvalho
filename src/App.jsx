@@ -1,10 +1,10 @@
-import {Header, Body, Footer} from './sections'
+import {Navbar, Body, Footer} from './sections'
 
 function App() {
 
   return (
       <>
-        <Header />
+        <Navbar />
         <Body />
         <Footer />
       </>

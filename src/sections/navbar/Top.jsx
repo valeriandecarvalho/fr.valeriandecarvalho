@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { logo, menu, close } from '../../../assets';
+import { logo, menu, close } from '../../assets/index.js';
 
 const Top = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -39,8 +39,8 @@ const Top = () => {
                             className="flex items-center space-x-3 hover:scale-105 transition-all duration-200 text-text hover:text-hover cursor-pointer"
                         >
                             <img src={logo} alt="Logo" className="xl:h-10 xl:w-10 h-9 w-9" />
-                            <span className="hidden xl:flex text-xl font-bold">Valérian De Carvalho</span>
-                            <span className="flex xl:hidden text-lg font-bold">VDC</span>
+                            <span className="hidden xl:flex text-xl">Valérian De Carvalho</span>
+                            <span className="flex xl:hidden text-lg">VDC</span>
                         </button>
                         <div className="hidden md:flex items-center space-x-8 text-sm xl:text-base">
                             {navLinks.map(({ id, label }) => (
