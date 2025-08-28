@@ -6,7 +6,7 @@ import {SkillCircle} from "./SkillCircle.jsx";
 import { arduino, cplusplus, docker, git, python, raspberry } from "../../../../assets/index.js";
 import { useRef } from "react";
 
-const About = () => {
+const Grid = () => {
     const containerRef = useRef(null);
     const textStyle = "text-text/70 text-xs font-sans";
     const cards = [
@@ -20,10 +20,10 @@ const About = () => {
                     <img src="/assets/about/pcb.webp" alt="Circuit imprimé" className="w-full object-contain mt-auto"/>
                 </div>
             ),
-            cols: "xl:col-span-6"
+            cols: "xl:col-span-10"
         },
         {
-            cols: "xl:col-span-4",
+            cols: "xl:col-span-5",
             content: (
                 <div ref={containerRef} className="relative w-full h-full flex items-center justify-center">
                     <div className="absolute inset-0 flex items-center justify-center">
@@ -39,7 +39,7 @@ const About = () => {
             )
         },
         {
-            cols: "xl:col-span-3",
+            cols: "xl:col-span-5",
             bg: "bg-vividviolet",
             content: (
                 <div className="h-full flex flex-col items-center justify-center text-center">
@@ -50,7 +50,7 @@ const About = () => {
         },
         {
             title: "Stack Technique",
-            cols: "xl:col-span-4",
+            cols: "xl:col-span-5",
             content: (
                 <div>
                     <p className={`${textStyle} mb-30`}>
@@ -62,7 +62,7 @@ const About = () => {
         },
         {
             title: "Ouverture Internationale",
-            cols: "xl:col-span-3",
+            cols: "xl:col-span-5",
             bg: "bg-gradient-to-tl from-blackolive via-raisinblack to-blackolive",
             content: (
                 <div>
@@ -76,12 +76,13 @@ const About = () => {
     ];
 
     return (
-        <SectionWrapper id="" className="pt-18 xl:pt-20 mb-[100vh]">
-            <p className="text-2xl md:text-3xl xl:text-4xl font-medium text-center mb-10">À propos</p>
+        <SectionWrapper id="" className="pt-[10vh] pb-[100vh] bg-[#dfdff0]">
             <div className="max-w-6xl mx-auto px-4">
+                <h2 className="text-primary">A propos de Valérian</h2>
+                <p className="text-primary text-xs">Plongez dans un univers de produits riche en propriétés intellectuelles, où les joueurs, l’IA agentive et la blockchain façonnent le nouveau paradigme économique.</p>
                 <div className="grid grid-cols-1 xl:grid-cols-10 gap-5">
                     {cards.map(({ title, cols, bg = 'bg-storm', content }, index) => (
-                        <div key={index} className={`${cols} ${bg} rounded-xl overflow-hidden flex flex-col ${index !== 1 && 'p-6'}`} style={{ height: '300px' }}>
+                        <div key={index} className={`${cols} ${bg} rounded-xl overflow-hidden flex flex-col ${index !== 1 && 'p-6'}`} style={{ height: '600px' }}>
                             {title && <h3 className="text-hover mb-2">{title}</h3>}
                             {content}
                         </div>
@@ -92,4 +93,4 @@ const About = () => {
     );
 };
 
-export default About;
+export default Grid;
