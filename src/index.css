@@ -1,200 +1,85 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #030412;
-  --color-secondary: #5c33cc;
-  --color-text: #cad5e2;
-  --color-hover: #ffffff;
-  --color-vividviolet: #9810fa;
-  --color-storm: #282b4b;
-  --color-blackolive: #3a3a3a;
-  --color-raisinblack: #242424;
-  --color-social: #3b3f42;
-  --animate-orbit: orbit 50s linear infinite;
-  @keyframes orbit {
-    0% {
-      transform: rotate(calc(var(--angle) * 1deg))
-      translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));
-    }
-    100% {
-      transform: rotate(calc(var(--angle) * 1deg + 360deg))
-      translateY(calc(var(--radius) * 1px))
-      rotate(calc((var(--angle) * -1deg) - 360deg));
-    }
-  }
-  --animate-marquee: marquee 50s linear infinite;
-  --animate-marquee-vertical: marquee-vertical 50s linear infinite;
+    --color-primary: #030412;
+    --color-secondary: #dfdff0;
+}
+
+/*POLICES*/
+
+@font-face {
+    font-family: 'poetsen-one';
+    src: url('/fonts/PoetsenOne-Regular.woff2') format('woff2');
+    font-display: swap;
 }
 
 @font-face {
-  font-family: 'Poetsen One';
-  src: url('/assets/fonts/PoetsenOne-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
+    font-family: 'zentry';
+    src: url('/fonts/Zentry-Regular.woff2') format('woff2');
+    font-display: swap;
 }
+
+/*STYLES GÉNÉRAUX*/
 
 body {
-  background: #030412;
-  font-family: "Poetsen One", sans-serif;
-  color: white;
-  scroll-behavior: smooth;
+    background: var(--color-primary);
+    font-family: "poetsen-one", sans-serif;
+    color: var(--color-secondary);
+    scroll-behavior: smooth;
 }
 
-.hover-animation {
-  @apply hover:-translate-y-1 duration-200;
+.abs-center {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
 }
 
-.scrollbar-hidden {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.scrollbar-hidden::-webkit-scrollbar {
-  display: none;
+/*NAVBAR*/
+.nav-btn {
+    @apply relative ms-5 text-xs xl:ms-10 xl:text-sm uppercase cursor-pointer select-none;
 }
 
-.mask-clip-path {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+.menu-line-horizontal, .audio-line-vertical {
+    background: var(--color-secondary);
+    margin: 1px;
 }
 
-.animated-title {
-  @apply flex flex-col gap-1 text-7xl uppercase leading-[.8] text-white sm:px-32 md:text-[6rem];
-}
-
-.about-image {
-  @apply absolute left-1/2 top-0 z-20 h-[60vh] w-96 origin-center -translate-x-1/2 overflow-hidden rounded-3xl md:w-[30vw];
-}
-
-.about-subtext {
-  @apply absolute bottom-[-80dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center text-lg md:max-w-[34rem];
-}
-
-.nav-hover-btn {
-    @apply relative ms-10 text-blue-50
-    after:absolute after:-bottom-0.5 after:left-0 after:h-[2px] after:w-full
-    after:origin-bottom-right after:scale-x-0 after:bg-[#dfdff0]
-    after:transform after:transition-transform after:duration-500 after:ease-in-out
-    hover:after:origin-bottom-left hover:after:scale-x-100
-    dark:after:bg-[#dfdff0]
-    cursor-pointer hover:scale-110
-    transition-transform duration-300 ease-in-out;
-}
-
-.floating-nav {
-    @apply bg-primary rounded-lg border;
-}
-
-.indicator-line {
-    width: 4px;
-    height: 20px;
-    background: #dfdff0;
-}
-.indicator-line.active {
-    animation: bounce 0.5s infinite alternate;
-}
-@keyframes bounce {
-    to {
-        transform: scaleY(0.3);
-    }
-}
-
-.indicator-line-horizontal {
+.menu-line-horizontal {
     height: 4px;
     width: 24px;
-    background: #dfdff0;
-    margin: 3px 0;
 }
 
-.indicator-line-horizontal.active {
+.menu-line-horizontal.active {
     animation: shrink 0.5s infinite alternate;
 }
 
+.audio-line-vertical {
+    height: 24px;
+    width: 4px;
+}
+
+.audio-line-vertical.active {
+    animation: shrink-vertical 0.5s infinite alternate;
+}
+
+/*HERO*/
+
+.mask-clip-path {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/*ANIMATIONS PERSONNALISÉES*/
+
 @keyframes shrink {
-    to {
-        transform: scaleX(0.3); /* rétrécit horizontalement */
-    }
-}
-/* Bouton avec croix simple qui tourne et s'agrandit */
-
-.close-button-animated {
-    position: relative;
-    display: inline-block;
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-    background: transparent;
-    border: none;
+    to { transform: scalex(0.7); }
 }
 
-.close-button-animated::before,
-.close-button-animated::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 20px;
-    height: 3px;
-    background: #cad5e2;
-    transition: all 0.3s ease;
+@keyframes shrink-vertical {
+    to { transform: scaley(0.3); }
 }
 
-.close-button-animated::before {
-    transform: translate(-50%, -50%) rotate(45deg);
+.hover-effect, .nav-btn, [class*="audio-line"], [class*="menu-line"] {
+    transition: transform 0.3s ease-in-out;
 }
 
-.close-button-animated::after {
-    transform: translate(-50%, -50%) rotate(-45deg);
-}
-
-.close-button-animated.active::before,
-.close-button-animated.active::after {
-    animation: spin-stop-grow 2s ease-in-out infinite;
-    background: #cad5e2;
-    width: 24px;
-    height: 3px;
-}
-
-@keyframes spin-stop-grow {
-    0% {
-        transform: translate(-50%, -50%) rotate(45deg) scale(1);
-    }
-    25% {
-        transform: translate(-50%, -50%) rotate(225deg) scale(1);
-    }
-    50% {
-        transform: translate(-50%, -50%) rotate(405deg) scale(1);
-    }
-    65% {
-        transform: translate(-50%, -50%) rotate(405deg) scale(1.3);
-    }
-    80% {
-        transform: translate(-50%, -50%) rotate(405deg) scale(1.3);
-    }
-    100% {
-        transform: translate(-50%, -50%) rotate(405deg) scale(1);
-    }
-}
-
-.close-button-animated.active::after {
-    animation: spin-stop-grow-reverse 2s ease-in-out infinite;
-}
-
-@keyframes spin-stop-grow-reverse {
-    0% {
-        transform: translate(-50%, -50%) rotate(-45deg) scale(1);
-    }
-    25% {
-        transform: translate(-50%, -50%) rotate(-225deg) scale(1);
-    }
-    50% {
-        transform: translate(-50%, -50%) rotate(-405deg) scale(1);
-    }
-    65% {
-        transform: translate(-50%, -50%) rotate(-405deg) scale(1.3);
-    }
-    80% {
-        transform: translate(-50%, -50%) rotate(-405deg) scale(1.3);
-    }
-    100% {
-        transform: translate(-50%, -50%) rotate(-405deg) scale(1);
-    }
+.hover-effect:hover, .nav-btn:hover {
+    transform: scale(1.25);
 }

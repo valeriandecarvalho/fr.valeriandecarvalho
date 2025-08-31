@@ -76,7 +76,7 @@ git checkout blog
 ```
 
 4. **Installer les dépendances :**
-   
+
 ```bash
 npm install
 ```
@@ -109,7 +109,7 @@ Toute contribution est la bienvenue : suggestions, rapports de bugs, ou pull req
 
 ## 📌 Informations complémentaires
 
-- **Nom de domaine :** [valeriandecarvalho.fr](https://valeriandecarvalho.fr)  
+- **Nom de domaine :** [valeriandecarvalho.fr](https://valeriandecarvalho.fr)
 - **Nom du dépôt GitHub :** `fr.valeriandecarvalho`
 
 ---
