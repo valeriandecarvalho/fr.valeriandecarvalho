@@ -21,7 +21,7 @@ const MobilePopup = memo(({ isOpen, onClose, navItems, onNavClick }) => {
                     <button
                         key={item.id}
                         onClick={() => onNavClick(item.id)}
-                        className="hover-effect cursor-pointer select-none"
+                        className="hover-effect cursor-pointer select-none hover:text-white"
                     >
                         {item.label}
                     </button>

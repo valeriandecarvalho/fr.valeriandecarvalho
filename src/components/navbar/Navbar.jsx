@@ -88,7 +88,7 @@ const NavBar = memo(() => {
                                 <button
                                     key={item.id}
                                     onClick={() => scrollToSection(item.id)}
-                                    className="nav-btn hover-effect z-50"
+                                    className="nav-btn hover-effect z-50 hover:text-white"
                                 >
                                     {item.label}
                                 </button>

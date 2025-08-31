@@ -10,11 +10,10 @@ function App() {
             <About />
             <Projects />
             <Formations />
-
-            <Services />
-            <Footer />
-            <div className="h-500 bg-secondary"></div>
             <Experiences />
+            <Services />
+            <div className="h-500 bg-secondary"></div>
+            <Footer />
         </>
     )
 }

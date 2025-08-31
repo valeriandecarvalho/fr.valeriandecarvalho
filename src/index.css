@@ -3,6 +3,7 @@
 @theme {
     --color-primary: #030412;
     --color-secondary: #dfdff0;
+    --color-button-hero: #fde047;
 }
 
 /*POLICES*/
@@ -62,6 +63,25 @@ body {
 
 /*HERO*/
 
+.hero-heading {
+    @apply uppercase text-5xl sm:right-10 sm:text-7xl md:text-9xl lg:text-[12rem];
+    font-family: 'zentry', sans-serif;
+    font-feature-settings: "ss01" on;
+}
+
+.button-hero {
+    @apply flex items-center cursor-pointer bg-button-hero text-primary px-4 py-2 rounded-full ml-1 text-sm;
+}
+
+.preview-hover {
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.preview-hover:hover {
+    animation: pulse-scale 0.5s infinite ease-in-out;
+}
+
 .mask-clip-path {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
@@ -74,6 +94,18 @@ body {
 
 @keyframes shrink-vertical {
     to { transform: scaley(0.3); }
+}
+
+@keyframes pulse-scale {
+    0% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.1);
+    }
 }
 
 .hover-effect, .nav-btn, [class*="audio-line"], [class*="menu-line"] {
