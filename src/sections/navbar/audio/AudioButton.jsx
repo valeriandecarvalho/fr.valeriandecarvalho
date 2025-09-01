@@ -1,14 +1,17 @@
-import { useRef, useState, useEffect, useCallback } from "react";
+import {useRef, useState, useEffect, useCallback, useContext, memo} from "react";
 import clsx from "clsx";
+import { AudioContext } from "../../../context/AudioContext.jsx";
 
-const AudioButton = () => {
+const AudioButton = memo(({ onMouseEnter }) => {
     const audioRef = useRef(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const hasAutoPlayed = useRef(false);
+    const { setIsAudioEnabled } = useContext(AudioContext);
 
     const toggleAudio = useCallback(() => {
         const nextState = !isPlaying;
         setIsPlaying(nextState);
+        setIsAudioEnabled(nextState);
         nextState ? audioRef.current.play() : audioRef.current.pause();
     }, [isPlaying]);
 
@@ -16,7 +19,10 @@ const AudioButton = () => {
         const handleFirstInteraction = () => {
             if (!hasAutoPlayed.current) {
                 hasAutoPlayed.current = true;
-                audioRef.current?.play().then(() => setIsPlaying(true));
+                audioRef.current?.play().then(() => {
+                    setIsPlaying(true);
+                    setIsAudioEnabled(true);
+                });
             }
         };
         const events = ['click', 'scroll', 'keydown', 'touchstart'];
@@ -39,8 +45,9 @@ const AudioButton = () => {
     return (
         <button
             onClick={toggleAudio}
+            onMouseEnter={onMouseEnter}
             title={isPlaying ? "Désactiver la musique" : "Activer la musique"}
-            className="ml-5 xl:ml-10 flex items-center space-x-1 cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out z-50"
+            className="ml-5 xl:ml-10 flex items-center space-x-1 cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out z-50 audio-button"
         >
             <audio ref={audioRef} className="hidden" src="/sounds/loop.mp3" loop />
             {[1,2,3,4].map(i => (
@@ -52,6 +59,6 @@ const AudioButton = () => {
             ))}
         </button>
     );
-};
+});
 
 export default AudioButton;

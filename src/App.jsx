@@ -1,20 +1,23 @@
-import {Navbar, Hero, Tagline, About, Projects, Formations, Experiences, Services, Footer} from './components'
+import {Navbar, Hero, Tagline, About, Projects, Formations, Experiences, Services, Footer} from './sections'
+import { ScrollToSectionProvider } from "./context/ScrollToSectionContext.jsx";
+import { AudioProvider } from "./context/AudioContext.jsx";
 
 function App() {
 
     return (
-        <>
-            <Navbar />
-            <Hero />
-            <Tagline />
-            <About />
-            <Projects />
-            <Formations />
-            <Experiences />
-            <Services />
-            <div className="h-500 bg-secondary"></div>
-            <Footer />
-        </>
+        <AudioProvider>
+            <ScrollToSectionProvider>
+                <Navbar />
+                <Hero />
+                <Tagline />
+                <About />
+                <Projects />
+                <Formations />
+                <Experiences />
+                <Services />
+                <Footer />
+            </ScrollToSectionProvider>
+        </AudioProvider>
     )
 }
 

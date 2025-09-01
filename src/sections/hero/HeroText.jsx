@@ -1,6 +1,13 @@
 import { TiLocationArrow } from "react-icons/ti";
+import { ScrollToSectionContext } from "../../context/ScrollToSectionContext.jsx";
+import {useCallback, useContext} from "react";
 
 const HeroText = () => {
+    const { triggerScroll } = useContext(ScrollToSectionContext);
+
+    const handleGoServices = useCallback(() => {
+        triggerScroll("#services");
+    }, [triggerScroll]);
     return (
         <div className="select-none relative size-full">
             <div className="absolute left-0 top-0 z-40 w-full pointer-events-none">
@@ -9,7 +16,7 @@ const HeroText = () => {
                     <p className="max-w-64 mb-2 text-xs ml-1">
                         Développeur Full-Stack <br /> Étudiant en informatique
                     </p>
-                    <button id="go-services" className="button-hero group relative pointer-events-auto transition-all duration-300 ease-in-out hover:scale-105">
+                    <button id="go-services" onClick={handleGoServices} className="button-hero group relative pointer-events-auto transition-all duration-300 ease-in-out hover:scale-105">
                         <TiLocationArrow className="w-5 h-5 mr-1" />
                         <span className="relative inline-block overflow-hidden">
                             <div className="relative transition-transform duration-300 ease-in-out group-hover:-translate-y-full">

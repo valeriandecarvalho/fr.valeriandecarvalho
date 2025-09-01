@@ -38,18 +38,22 @@ body {
     @apply relative ms-5 text-xs xl:ms-10 xl:text-sm uppercase cursor-pointer select-none;
 }
 
-.menu-line-horizontal, .audio-line-vertical {
+.mobile-line-horizontal, .audio-line-vertical {
     background: var(--color-secondary);
     margin: 1px;
 }
 
-.menu-line-horizontal {
+.mobile-line-horizontal {
     height: 4px;
     width: 24px;
 }
 
-.menu-line-horizontal.active {
+.mobile-line-horizontal.active {
     animation: shrink 0.5s infinite alternate;
+}
+
+.mobile-button:hover .mobile-line-horizontal {
+    background: #ffffff;
 }
 
 .audio-line-vertical {
@@ -59,6 +63,10 @@ body {
 
 .audio-line-vertical.active {
     animation: shrink-vertical 0.5s infinite alternate;
+}
+
+.audio-button:hover .audio-line-vertical {
+    background: #ffffff;
 }
 
 /*HERO*/
@@ -82,8 +90,22 @@ body {
     animation: pulse-scale 0.5s infinite ease-in-out;
 }
 
-.mask-clip-path {
+.hero-preview {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+/* TAGLINE */
+
+.tagline-image {
+    @apply absolute left-1/2 top-0 z-20 h-[60vh] w-96 origin-center -translate-x-1/2 overflow-hidden rounded-3xl md:w-[30vw];
+}
+
+.tagline-heading {
+    @apply flex flex-col gap-1 text-7xl uppercase leading-[.8] text-white sm:px-32 md:text-[6rem];
+}
+
+.tagline-subtext {
+    @apply absolute bottom-[-80dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center text-lg md:max-w-[34rem];
 }
 
 /*ANIMATIONS PERSONNALISÉES*/
@@ -108,7 +130,7 @@ body {
     }
 }
 
-.hover-effect, .nav-btn, [class*="audio-line"], [class*="menu-line"] {
+.hover-effect, .nav-btn, [class*="audio-line"], [class*="mobile-line"] {
     transition: transform 0.3s ease-in-out;
 }
 

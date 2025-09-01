@@ -23,7 +23,7 @@ const NexusPopup = memo(({ isOpen, onClose }) => {
                 }}
             >
                 <a className="text-secondary/50 cursor-not-allowed">Portfolio</a>
-                <a href="https://blog.valeriandecarvalho.fr" className="hover-effect cursor-pointer select-none">Blog</a>
+                <a href="https://blog.valeriandecarvalho.fr" className="hover-effect cursor-pointer select-none hover:text-white">Blog</a>
             </nav>
         </div>
     );

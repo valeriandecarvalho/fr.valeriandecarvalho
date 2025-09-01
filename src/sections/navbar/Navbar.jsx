@@ -1,9 +1,11 @@
-import { memo, useCallback, useRef, useState, useEffect } from "react";
+import { memo, useCallback, useRef, useState, useEffect, useContext } from "react";
 import { useWindowScroll } from "react-use";
 import { TiLocationArrow } from "react-icons/ti";
 import NexusButton from "./nexus/NexusButton.jsx";
 import MobileMenu from "./mobile/MobileMenu.jsx";
 import AudioButton from "./audio/AudioButton.jsx";
+import { ScrollToSectionContext } from "../../context/ScrollToSectionContext.jsx";
+import { AudioContext } from "../../context/AudioContext.jsx";
 
 const navItems = [
     { id: "#accueil", label: "Accueil" },
@@ -20,30 +22,30 @@ const NavBar = memo(() => {
     const [isNexusOpen, setIsNexusOpen] = useState(false);
     const [navbarVisible, setNavbarVisible] = useState(true);
     const lastScrollY = useRef(0);
-    const isScrollingFromClick = useRef(false);
+    const { triggerScroll, isScrollingFromClick } = useContext(ScrollToSectionContext);
+    const { isAudioEnabled } = useContext(AudioContext);
     const isAtTop = currentScrollY < 50;
     const handleMobileMenuToggle = useCallback((newState) => {
-        if (newState && isNexusOpen) {
-            setIsNexusOpen(false);
-        }
+        if (newState && isNexusOpen) setIsNexusOpen(false);
         setIsMobileMenuOpen(newState);
     }, [isNexusOpen]);
     const handleNexusToggle = useCallback((newState) => {
-        if (newState && isMobileMenuOpen) {
-            setIsMobileMenuOpen(false);
-        }
+        if (newState && isMobileMenuOpen) setIsMobileMenuOpen(false);
         setIsNexusOpen(newState);
     }, [isMobileMenuOpen]);
     const scrollToSection = useCallback((sectionId) => {
-        isScrollingFromClick.current = true;
-        document.querySelector(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+        triggerScroll(sectionId);
         setIsMobileMenuOpen(false);
         setIsNexusOpen(false);
-        setTimeout(() => isScrollingFromClick.current = false, 1000);
-    }, []);
+    }, [triggerScroll]);
     const shouldShowNavbar = navbarVisible || isMobileMenuOpen || isNexusOpen;
-    const handleLogoClick = useCallback(() => scrollToSection("#accueil"), [scrollToSection]);
-
+    const hoverSound = useRef(new Audio("/sounds/hover.mp3"));
+    const playHoverSound = () => {
+        if (isAudioEnabled) {
+            hoverSound.current.currentTime = 0;
+            hoverSound.current.play();
+        }
+    }
     useEffect(() => {
         document.body.style.overflow = (isMobileMenuOpen || isNexusOpen) ? 'hidden' : 'unset';
         return () => document.body.style.overflow = 'unset';
@@ -55,10 +57,9 @@ const NavBar = memo(() => {
             setNavbarVisible(currentY <= lastScrollY.current || currentY < 50);
             lastScrollY.current = currentY;
         };
-
         window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [isScrollingFromClick]);
 
     return (
         <div className="fixed inset-x-0 top-2 z-50 h-20 transition-transform duration-700 ease-in-out"
@@ -70,8 +71,8 @@ const NavBar = memo(() => {
                         <img
                             src="/images/logo-light.webp"
                             alt="logo"
-                            onClick={handleLogoClick}
-                            className="w-10 hover-effect cursor-pointer z-50"
+                            onClick={() => scrollToSection("#accueil")}
+                            className="w-10 cursor-pointer z-50"
                         />
                         <NexusButton
                             id="nexus"
@@ -88,6 +89,7 @@ const NavBar = memo(() => {
                                 <button
                                     key={item.id}
                                     onClick={() => scrollToSection(item.id)}
+                                    onMouseEnter={playHoverSound}
                                     className="nav-btn hover-effect z-50 hover:text-white"
                                 >
                                     {item.label}
@@ -101,8 +103,9 @@ const NavBar = memo(() => {
                                 isOpen={isMobileMenuOpen}
                                 onToggle={handleMobileMenuToggle}
                                 isNexusOpen={isNexusOpen}
+                                onMouseEnter={playHoverSound}
                             />
-                            <AudioButton />
+                            <AudioButton onMouseEnter={playHoverSound}/>
                         </div>
                     </div>
                 </nav>

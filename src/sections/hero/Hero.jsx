@@ -93,7 +93,7 @@ const Hero = () => {
                     className="absolute inset-0 w-full h-full object-cover object-center z-10"
                 />
                 <div
-                    className="mask-clip-path abs-center z-30 opacity-0 hover:opacity-100 transition-all duration-500"
+                    className="hero-preview abs-center z-30 opacity-0 hover:opacity-100 transition-all duration-500"
                     onMouseMove={handleMouseInteraction}
                     onMouseLeave={handleMouseInteraction}
                 >
