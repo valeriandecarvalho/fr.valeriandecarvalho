@@ -2,10 +2,11 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
+import { FlipWords } from "./FlipWords";
 
 const Tagline = () => {
     const clipRef = useRef(null);
-
+    const words = ["Développeur Full-Stack", "Etudiant en Informatique", "Freelance Web"];
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
         const clipAnimation = gsap.timeline({
@@ -19,7 +20,6 @@ const Tagline = () => {
                 pinSpacing: true,
             },
         });
-
         clipAnimation
             .fromTo(".mask-clip-path",
                 {
@@ -45,12 +45,10 @@ const Tagline = () => {
                 }
             )
             .to(".mask-clip-path", { duration: 0.3 });
-
         const handleResize = () => ScrollTrigger.refresh();
         const resizeTimer = setTimeout(handleResize, 250);
         window.addEventListener("resize", handleResize);
         window.addEventListener("orientationchange", handleResize);
-
         return () => {
             clearTimeout(resizeTimer);
             window.removeEventListener("resize", handleResize);
@@ -61,11 +59,12 @@ const Tagline = () => {
 
     return (
         <section id="tagline" className="pt-20 mt-[25vh] min-h-screen w-full overflow-x-hidden">
-            <div className="relative mb-8 pt-32 flex flex-col items-center gap-5">
-                <p className="font-general text-sm uppercase md:text-[10px]">Bienvenue dans mon univers</p>
-                <h1 className="tagline-heading">Valérian</h1>
+            <div className="relative flex flex-col items-center gap-5 text-center">
+                <p className="font-general text-sm uppercase text-[10px] sm:text-[12px] md:text-[14px]">Bienvenue dans mon univers</p>
+                <h1 className="tagline-heading">Valérian De Carvalho<br/><FlipWords words={words} className=""/></h1>
                 <div className="tagline-subtext">
-                    <p>Vos projets, ma quête — je crée vos sites web de A à Z</p>
+                    <p className="text-base md:text-xl">Vos projets, ma quête — je crée vos sites web de A à Z</p>
+                    <p className="text-secondary/50 text-xs md:text-sm">Pas seulement freelance : stages, projets et missions sont les bienvenus. Pour les missions, direction Malt ; pour le reste, utilisez le formulaire de contact.</p>
                 </div>
             </div>
             <div className="h-dvh w-full relative" id="clip" ref={clipRef}>

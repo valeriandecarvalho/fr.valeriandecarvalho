@@ -72,7 +72,7 @@ body {
 /*HERO*/
 
 .hero-heading {
-    @apply uppercase text-5xl sm:right-10 sm:text-7xl md:text-9xl lg:text-[12rem];
+    @apply uppercase text-4xl sm:right-10 sm:text-7xl md:text-9xl lg:text-[12rem];
     font-family: 'zentry', sans-serif;
     font-feature-settings: "ss01" on;
 }
@@ -101,11 +101,11 @@ body {
 }
 
 .tagline-heading {
-    @apply flex flex-col gap-1 text-7xl uppercase leading-[.8] text-white sm:px-32 md:text-[6rem];
+    @apply flex flex-col gap-1 text-7xl uppercase text-white sm:px-16 text-[1.5rem] sm:text-[2rem] md:text-[2.5rem] xl:text-[5rem];
 }
 
 .tagline-subtext {
-    @apply absolute bottom-[-80dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center text-lg md:max-w-[34rem];
+    @apply absolute bottom-[-100dvh] left-1/2 w-full max-w-96 -translate-x-1/2 text-center max-w-[75%];
 }
 
 /*ANIMATIONS PERSONNALISÉES*/
