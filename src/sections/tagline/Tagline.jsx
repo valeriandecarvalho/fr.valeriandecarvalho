@@ -6,7 +6,7 @@ import { FlipWords } from "./FlipWords";
 
 const Tagline = () => {
     const clipRef = useRef(null);
-    const words = ["Développeur Full-Stack", "Etudiant en Informatique", "Freelance Web"];
+    const words = ["Développeur Full-Stack", "Etudiant en Informatique", "Freelance Digital"];
     useGSAP(() => {
         gsap.registerPlugin(ScrollTrigger);
         const clipAnimation = gsap.timeline({
@@ -60,16 +60,26 @@ const Tagline = () => {
     return (
         <section id="tagline" className="pt-20 mt-[25vh] min-h-screen w-full overflow-x-hidden">
             <div className="relative flex flex-col items-center gap-5 text-center">
-                <p className="font-general text-sm uppercase text-[10px] sm:text-[12px] md:text-[14px]">Bienvenue dans mon univers</p>
-                <h1 className="tagline-heading">Valérian De Carvalho<br/><FlipWords words={words} className=""/></h1>
+                <p className="font-general text-sm uppercase text-[10px] sm:text-[12px] md:text-[14px]">Bienvenue dans
+                    mon univers</p>
+                <h1 className="tagline-heading">Valérian De Carvalho<br/><FlipWords words={words}/></h1>
                 <div className="tagline-subtext">
-                    <p className="text-base md:text-xl">Vos projets, ma quête — je crée vos sites web de A à Z</p>
-                    <p className="text-secondary/50 text-xs md:text-sm">Pas seulement freelance : stages, projets et missions sont les bienvenus. Pour les missions, direction Malt ; pour le reste, utilisez le formulaire de contact.</p>
+                    <p className="text-base md:text-xl">
+                        Vos projets, mes opportunités — je développe vos plateformes de A à Z
+                    </p>
+                    <p className="text-secondary/50 text-xs md:text-sm">
+                        Étudiant et freelance : je recherche aussi des stages, projets et expériences en plus des
+                        missions.<br/>
+                        Contactez-moi via le formulaire, ou retrouvez mes missions sur Malt.
+                    </p>
                 </div>
+
             </div>
             <div className="h-dvh w-full relative" id="clip" ref={clipRef}>
-                <div className="mask-clip-path absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-hidden">
-                    <img src="images/tagline.webp" alt="Background" className="w-full h-full object-cover" loading="lazy" />
+                <div
+                    className="mask-clip-path absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+                    <img src="images/tagline.webp" alt="Background" className="w-full h-full object-cover"
+                         loading="lazy"/>
                 </div>
             </div>
         </section>

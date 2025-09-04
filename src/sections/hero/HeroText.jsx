@@ -14,7 +14,7 @@ const HeroText = () => {
                 <div className="mt-24 px-5">
                     <p className="hero-heading mb-2">Valerian</p>
                     <p className="max-w-64 mb-2 text-xs ml-1">
-                        Un Site Web À Réaliser ?<br/>Je Suis Là Pour En Parler !
+                        Une idée à concrétiser ?<br/>Parlons-en dès maintenant.
                     </p>
                     <button id="go-services" onClick={handleGoServices} className="button-hero group relative pointer-events-auto transition-all duration-300 ease-in-out hover:scale-105">
                         <TiLocationArrow className="w-5 h-5 mr-1" />

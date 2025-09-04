@@ -3,7 +3,7 @@
 @theme {
     --color-primary: #030412;
     --color-secondary: #dfdff0;
-    --color-button-hero: #fde047;
+    --color-sunflower: #fde047;
 }
 
 /*POLICES*/
@@ -78,7 +78,7 @@ body {
 }
 
 .button-hero {
-    @apply flex items-center cursor-pointer bg-button-hero text-primary px-4 py-2 rounded-full ml-1 text-sm;
+    @apply flex items-center cursor-pointer bg-sunflower text-primary px-4 py-2 rounded-full ml-1 text-sm;
 }
 
 .preview-hover {
