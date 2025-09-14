@@ -1,5 +1,4 @@
 import { memo, useCallback, useRef, useState, useEffect, useContext } from "react";
-import { useWindowScroll } from "react-use";
 import { TiLocationArrow } from "react-icons/ti";
 import NexusButton from "./nexus/NexusButton.jsx";
 import MobileMenu from "./mobile/MobileMenu.jsx";
@@ -17,35 +16,35 @@ const navItems = [
 ];
 
 const NavBar = memo(() => {
-    const { y: currentScrollY } = useWindowScroll();
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isNexusOpen, setIsNexusOpen] = useState(false);
     const [navbarVisible, setNavbarVisible] = useState(true);
     const lastScrollY = useRef(0);
+    const scrollTimeout = useRef(null);
+    const navRef = useRef(null);
     const { triggerScroll, isScrollingFromClick } = useContext(ScrollToSectionContext);
     const { isAudioEnabled } = useContext(AudioContext);
-    const isAtTop = currentScrollY < 50;
-    const handleMobileMenuToggle = useCallback((newState) => {
-        if (newState && isNexusOpen) setIsNexusOpen(false);
-        setIsMobileMenuOpen(newState);
-    }, [isNexusOpen]);
-    const handleNexusToggle = useCallback((newState) => {
-        if (newState && isMobileMenuOpen) setIsMobileMenuOpen(false);
-        setIsNexusOpen(newState);
-    }, [isMobileMenuOpen]);
+    const handleMenuToggle = useCallback((type, newState) => {
+        if (type === 'mobile') {
+            if (newState && isNexusOpen) setIsNexusOpen(false);
+            setIsMobileMenuOpen(newState);
+        } else {
+            if (newState && isMobileMenuOpen) setIsMobileMenuOpen(false);
+            setIsNexusOpen(newState);
+        }
+    }, [isMobileMenuOpen, isNexusOpen]);
     const scrollToSection = useCallback((sectionId) => {
         triggerScroll(sectionId);
         setIsMobileMenuOpen(false);
         setIsNexusOpen(false);
     }, [triggerScroll]);
-    const shouldShowNavbar = navbarVisible || isMobileMenuOpen || isNexusOpen;
-    const hoverSound = useRef(new Audio("/sounds/hover.mp3"));
-    const playHoverSound = () => {
+    const hoverSound = useRef(new Audio("/sounds/hover.mp3")).current;
+    const playHoverSound = useCallback(() => {
         if (isAudioEnabled) {
-            hoverSound.current.currentTime = 0;
-            hoverSound.current.play();
+            hoverSound.currentTime = 0;
+            hoverSound.play();
         }
-    }
+    }, [isAudioEnabled, hoverSound]);
     useEffect(() => {
         document.body.style.overflow = (isMobileMenuOpen || isNexusOpen) ? 'hidden' : 'unset';
         return () => document.body.style.overflow = 'unset';
@@ -54,19 +53,31 @@ const NavBar = memo(() => {
         const handleScroll = () => {
             if (isScrollingFromClick.current) return;
             const currentY = window.scrollY;
-            setNavbarVisible(currentY <= lastScrollY.current || currentY < 50);
-            lastScrollY.current = currentY;
+            const atTop = currentY < 50;
+            if (navRef.current) {
+                const action = atTop ? 'remove' : 'add';
+                navRef.current.classList[action]('bg-primary', 'border-secondary/20');
+                navRef.current.classList[action === 'remove' ? 'add' : 'remove']('bg-transparent', 'border-transparent');
+            }
+            clearTimeout(scrollTimeout.current);
+            scrollTimeout.current = setTimeout(() => {
+                setNavbarVisible(currentY <= lastScrollY.current || atTop);
+                lastScrollY.current = currentY;
+            }, 100);
         };
         window.addEventListener('scroll', handleScroll, { passive: true });
-        return () => window.removeEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            clearTimeout(scrollTimeout.current);
+        };
     }, [isScrollingFromClick]);
+    const shouldShowNavbar = navbarVisible || isMobileMenuOpen || isNexusOpen;
 
     return (
         <div className="fixed inset-x-0 top-2 z-50 h-20 transition-transform duration-700 ease-in-out"
              style={{ transform: shouldShowNavbar ? 'translateY(0)' : 'translateY(-150%)' }}>
             <header className="absolute top-1/2 w-full -translate-y-1/2 px-0 md:px-4">
-                <nav className={`flex size-full items-center justify-between p-4 rounded-lg
-            ${isAtTop ? 'bg-transparent border-transparent' : 'bg-primary border-secondary/20'}`}>
+                <nav ref={navRef} className="flex size-full items-center justify-between p-4 rounded-lg transition-all duration-300 bg-transparent border-transparent">
                     <div className="flex items-center gap-7">
                         <img
                             src="/images/logo-light.webp"
@@ -80,7 +91,7 @@ const NavBar = memo(() => {
                             rightIcon={<TiLocationArrow/>}
                             containerClass="bg-secondary flex items-center justify-center gap-1 z-50"
                             isOpen={isNexusOpen}
-                            onToggle={handleNexusToggle}
+                            onToggle={(newState) => handleMenuToggle('nexus', newState)}
                         />
                     </div>
                     <div className="flex h-full items-center">
@@ -101,7 +112,7 @@ const NavBar = memo(() => {
                                 navItems={navItems}
                                 onNavClick={scrollToSection}
                                 isOpen={isMobileMenuOpen}
-                                onToggle={handleMobileMenuToggle}
+                                onToggle={(newState) => handleMenuToggle('mobile', newState)}
                                 isNexusOpen={isNexusOpen}
                                 onMouseEnter={playHoverSound}
                             />

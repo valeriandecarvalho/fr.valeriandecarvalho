@@ -64,9 +64,9 @@ const Tagline = () => {
                     mon univers</p>
                 <h1 className="tagline-heading">Valérian De Carvalho<br/><FlipWords words={words}/></h1>
                 <div className="tagline-subtext">
-                    <p className="text-base md:text-xl">
+                    <h2 className="text-base md:text-xl">
                         Vos projets, mes opportunités — je développe vos plateformes de A à Z
-                    </p>
+                    </h2>
                     <p className="text-secondary/50 text-xs md:text-sm">
                         Étudiant et freelance : je recherche aussi des stages, projets et expériences en plus des
                         missions.<br/>
@@ -78,8 +78,7 @@ const Tagline = () => {
             <div className="h-dvh w-full relative" id="clip" ref={clipRef}>
                 <div
                     className="mask-clip-path absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 overflow-hidden">
-                    <img src="images/tagline.webp" alt="Background" className="w-full h-full object-cover"
-                         loading="lazy"/>
+                    <img src="images/tagline.webp" alt="Background" className="w-full h-full object-cover"/>
                 </div>
             </div>
         </section>

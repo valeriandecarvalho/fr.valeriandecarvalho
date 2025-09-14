@@ -1,8 +1,10 @@
 const About = () => {
     return (
-        <section id="a-propos" className="pt-20 pt-[25vh] bg-secondary">
-            <h1 className="text-primary">A Propos</h1>
-        </section>
+        <div className="pt-[25vh] bg-secondary">
+            <section id="a-propos" className="pt-20">
+                <h2 className="text-primary text-center">A Propos</h2>
+            </section>
+        </div>
     );
 }
 
