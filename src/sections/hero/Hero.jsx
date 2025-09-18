@@ -1,39 +1,45 @@
-import { useEffect, useState } from "react";
+import { useCallback, useRef, useState, useMemo } from "react";
 import HeroVideo from "./HeroVideo.jsx";
 import HeroPreview from "./HeroPreview.jsx";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import HeroBackground from "./HeroBackground.jsx";
 import HeroText from "./HeroText.jsx";
-gsap.registerPlugin(ScrollTrigger);
 
+const keyTimes = [0, 3.6, 7.6, 11.2, 19.4, 21.9];
+const VIDEO_URL = "https://fr-valeriandecarvalho.b-cdn.net/videos/webm/vp9/hero.vp9.webm";
 const Hero = () => {
-    const [videoSrc, setVideoSrc] = useState(null);
-    const handleTimeReached = (time) => {
-        console.log("Time reached:", time);
-    };
-    useEffect(() => {
-        let blobUrl;
-        const loadVideo = async () => {
-            const response = await fetch("videos/mp4/hero.h264.mp4");
-            const blob = await response.blob();
-            blobUrl = URL.createObjectURL(blob);
-            setVideoSrc(blobUrl);
-        };
-        loadVideo();
-        return () => {
-            if (blobUrl) {
-                URL.revokeObjectURL(blobUrl);
-            }
-        };
-    }, []);
+    const [previewStart, setPreviewStart] = useState(keyTimes[1]);
+    const videoRef = useRef(null);
+    const memoizedKeyTimes = useMemo(() => keyTimes, []);
+    const handleTimeReached = useCallback((time) => {
+        const idx = memoizedKeyTimes.indexOf(time);
+        if (idx !== -1) {
+            setPreviewStart(memoizedKeyTimes[(idx + 1) % memoizedKeyTimes.length]);
+        }
+    }, [memoizedKeyTimes]);
+    const handlePreviewClick = useCallback(() => {
+        const currentIdx = memoizedKeyTimes.indexOf(previewStart);
+        if (currentIdx !== -1) {
+            const nextTime = memoizedKeyTimes[(currentIdx + 1) % memoizedKeyTimes.length];
+            setPreviewStart(nextTime);
+            videoRef.current?.seekTo?.(memoizedKeyTimes[currentIdx]);
+        }
+    }, [previewStart, memoizedKeyTimes]);
 
     return (
         <section id="accueil" className="relative h-dvh w-full overflow-x-hidden">
-            <HeroBackground getVideoSrc={videoSrc} />
-            <HeroVideo getVideoSrc={videoSrc} onTimeReached={handleTimeReached} />
+            <HeroBackground getVideoSrc={VIDEO_URL} />
+            <HeroVideo
+                ref={videoRef}
+                getVideoSrc={VIDEO_URL}
+                onTimeReached={handleTimeReached}
+                keyTimes={memoizedKeyTimes}
+            />
             <HeroText />
-            <HeroPreview getVideoSrc={videoSrc} />
+            <HeroPreview
+                getVideoSrc={VIDEO_URL}
+                start={previewStart}
+                onClick={handlePreviewClick}
+            />
         </section>
     );
 };
