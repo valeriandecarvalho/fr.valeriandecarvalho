@@ -10,13 +10,13 @@
 
 @font-face {
     font-family: 'poetsen-one';
-    src: url('/fonts/PoetsenOne-Regular.woff2') format('woff2');
+    src: url('https://fr-valeriandecarvalho.b-cdn.net/fonts/PoetsenOne-Regular.woff2') format('woff2');
     font-display: swap;
 }
 
 @font-face {
     font-family: 'zentry';
-    src: url('/fonts/Zentry-Regular.woff2') format('woff2');
+    src: url('https://fr-valeriandecarvalho.b-cdn.net/fonts/Zentry-Regular.woff2') format('woff2');
     font-display: swap;
 }
 
@@ -92,6 +92,13 @@ body {
 
 .hero-preview {
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    pointer-events: auto;
+    transition: opacity 0.5s ease-in-out;
+}
+
+/* Le preview */
+.hero-preview:hover {
+    opacity: 1 !important;
 }
 
 /* TAGLINE */
@@ -136,4 +143,14 @@ body {
 
 .hover-effect:hover, .nav-btn:hover {
     transform: scale(1.25);
+}
+
+
+.preview-hover {
+    transform: scale(1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.preview-hover:hover {
+    animation: pulse-scale 0.5s infinite ease-in-out;
 }

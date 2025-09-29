@@ -37,8 +37,19 @@ const NavBar = memo(() => {
         triggerScroll(sectionId);
         setIsMobileMenuOpen(false);
         setIsNexusOpen(false);
+
+        // Force la mise à jour du fond après le scroll
+        setTimeout(() => {
+            const currentY = window.scrollY;
+            const atTop = currentY < 50;
+            if (navRef.current) {
+                const action = atTop ? 'remove' : 'add';
+                navRef.current.classList[action]('bg-primary', 'border-secondary/20');
+                navRef.current.classList[action === 'remove' ? 'add' : 'remove']('bg-transparent', 'border-transparent');
+            }
+        }, 800);
     }, [triggerScroll]);
-    const hoverSound = useRef(new Audio("/sounds/hover.mp3")).current;
+    const hoverSound = useRef(new Audio("https://fr-valeriandecarvalho.b-cdn.net/sounds/hover.mp3")).current;
     const playHoverSound = useCallback(() => {
         if (isAudioEnabled) {
             hoverSound.currentTime = 0;
@@ -80,7 +91,7 @@ const NavBar = memo(() => {
                 <nav ref={navRef} className="flex size-full items-center justify-between p-4 rounded-lg transition-all duration-300 bg-transparent border-transparent">
                     <div className="flex items-center gap-7">
                         <img
-                            src="/images/logo-light.webp"
+                            src="/logo-light.webp"
                             alt="logo"
                             onClick={() => scrollToSection("#accueil")}
                             className="w-10 cursor-pointer z-50"

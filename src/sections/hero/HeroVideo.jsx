@@ -10,6 +10,11 @@ const HeroVideo = forwardRef(({ getVideoSrc, onTimeReached, keyTimes }, ref) => 
         seekTo: (t) => {
             const v = videoRef.current;
             if (!v) return;
+            v.style.transition = "none";
+            v.style.transform = "scale(0)";
+            v.offsetHeight;
+            v.style.transition = "transform 300ms ease-out";
+            v.style.transform = "scale(1)";
             v.currentTime = t;
             triggered.current.clear();
             nextIndex.current = 0;

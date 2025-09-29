@@ -49,7 +49,7 @@ const AudioButton = memo(({ onMouseEnter }) => {
             title={isPlaying ? "Désactiver la musique" : "Activer la musique"}
             className="ml-5 xl:ml-10 flex items-center space-x-1 cursor-pointer hover:scale-110 transition-transform duration-300 ease-in-out z-50 audio-button"
         >
-            <audio ref={audioRef} className="hidden" src="/sounds/loop.mp3" loop />
+            <audio ref={audioRef} className="hidden" src="https://fr-valeriandecarvalho.b-cdn.net/sounds/loop.mp3" loop />
             {[1,2,3,4].map(i => (
                 <div
                     key={i}
